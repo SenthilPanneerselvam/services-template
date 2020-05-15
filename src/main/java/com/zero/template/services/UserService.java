@@ -24,7 +24,7 @@ public class UserService {
 	public UserDTO saveUser(UserDTO user) throws Exception {
 		User userEntity = BeanMapper.map(user, User.class);
 		// encrypting the password
-		byte[] salt = PasswordUtil.generateSalt();
+		String salt = PasswordUtil.generateSalt();
 		String encryptedPassword = PasswordUtil.getEncryptedPassword(user.getPassword(), salt);
 		userEntity.setPassword(encryptedPassword);
 		userEntity.setSalt(new String(salt));

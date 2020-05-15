@@ -34,7 +34,7 @@ public class GenericResponse {
 	public void addError(String errorCode, String errorMessage) {
 		if(errors == null)
 			errors = new ArrayList<Error>();
-		errors.add(new Error());
+		errors.add(new Error(errorCode, errorMessage));
 	}
 
 	public Object getData() {

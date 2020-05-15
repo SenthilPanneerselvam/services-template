@@ -1,28 +1,29 @@
 package com.zero.template.utils;
 
+import java.math.BigInteger;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.security.spec.InvalidKeySpecException;
 import java.security.spec.KeySpec;
-import java.util.Arrays;
+import java.util.Objects;
 
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
 
 public class PasswordUtil {
 
-	public static boolean verifyPassword(String attemptedPassword, byte[] encryptedPassword, byte[] salt)
+	public static boolean verifyPassword(String attemptedPassword, String encryptedPassword, String salt)
 			throws NoSuchAlgorithmException, InvalidKeySpecException {
 		// Encrypt the clear-text password using the same salt that was used to
 		// encrypt the original password
-		byte[] encryptedAttemptedPassword = getEncryptedPassword(attemptedPassword, salt).getBytes();
+		String encryptedAttemptedPassword = getEncryptedPassword(attemptedPassword, salt);
 
 		// Authentication succeeds if encrypted password that the user entered
 		// is equal to the stored hash
-		return Arrays.equals(encryptedPassword, encryptedAttemptedPassword);
+		return Objects.equals(encryptedAttemptedPassword, encryptedPassword);
 	}
 
-	public static String getEncryptedPassword(String password, byte[] salt)
+	public static String getEncryptedPassword(String password, String salt)
 			throws NoSuchAlgorithmException, InvalidKeySpecException {
 		// PBKDF2 with SHA-1 as the hashing algorithm. Note that the NIST
 		// specifically names SHA-1 as an acceptable hashing algorithm for PBKDF2
@@ -36,14 +37,15 @@ public class PasswordUtil {
 		// http://blog.crackpassword.com/2010/09/smartphone-forensics-cracking-blackberry-backup-passwords/
 		int iterations = 20000;
 
-		KeySpec spec = new PBEKeySpec(password.toCharArray(), salt, iterations, derivedKeyLength);
+		KeySpec spec = new PBEKeySpec(password.toCharArray(), salt.getBytes(), iterations, derivedKeyLength);
 
 		SecretKeyFactory f = SecretKeyFactory.getInstance(algorithm);
 
-		return new String(f.generateSecret(spec).getEncoded());
+		byte[] encrypted = f.generateSecret(spec).getEncoded();
+		return toHex(encrypted);
 	}
 
-	public static byte[] generateSalt() throws NoSuchAlgorithmException {
+	public static String generateSalt() throws NoSuchAlgorithmException {
 		// VERY important to use SecureRandom instead of just Random
 		SecureRandom random = SecureRandom.getInstance("SHA1PRNG");
 
@@ -51,7 +53,28 @@ public class PasswordUtil {
 		byte[] salt = new byte[8];
 		random.nextBytes(salt);
 
-		return salt;
+		return toHex(salt);
+	}
+	
+	private static String toHex(byte[] array) throws NoSuchAlgorithmException
+    {
+        BigInteger bi = new BigInteger(1, array);
+        String hex = bi.toString(16);
+        int paddingLength = (array.length * 2) - hex.length();
+        if(paddingLength > 0)
+        {
+            return String.format("%0"  +paddingLength + "d", 0) + hex;
+        }else{
+            return hex;
+        }
+    }
+	
+	public static void main(String[] args) throws Exception {
+		String salt = generateSalt();
+		String encrypted = getEncryptedPassword("aspire@123", salt);
+		System.out.println(salt);
+		System.out.println(encrypted);
+		System.out.println(verifyPassword("aspire@23", encrypted, salt));
 	}
 
 }

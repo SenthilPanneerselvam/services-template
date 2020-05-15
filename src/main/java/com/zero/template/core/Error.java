@@ -7,7 +7,8 @@ public class Error {
 	}
 	
 	public Error(String errorCode, String errorMessage) {
-		
+		this.errorCode = errorCode;
+		this.errorMessage = errorMessage;
 	}
 	
 	private String errorCode;
