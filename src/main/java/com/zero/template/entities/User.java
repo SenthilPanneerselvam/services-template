@@ -1,15 +1,16 @@
 package com.zero.template.entities;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 
 @Entity
 public class User {
 	
-	public static User SYSTEM_USER = new User();
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
@@ -31,6 +32,10 @@ public class User {
 	private String federationType;
 	
 	private String federationId;
+	
+	@OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "role_id", referencedColumnName = "id")
+    private Role role;
 	
 	public Long getId() {
 		return this.id;
@@ -110,6 +115,14 @@ public class User {
 
 	public void setSalt(String salt) {
 		this.salt = salt;
+	}
+
+	public Role getRole() {
+		return role;
+	}
+
+	public void setRole(Role role) {
+		this.role = role;
 	}
 	
 }

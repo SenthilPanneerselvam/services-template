@@ -1,4 +1,4 @@
-package com.zero.template.dtos;
+package com.zero.template.core;
 
 import java.util.ArrayList;
 import java.util.List;

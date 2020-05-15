@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.zero.template.dtos.GenericResponse;
+import com.zero.template.core.GenericResponse;
 import com.zero.template.dtos.UserDTO;
 import com.zero.template.services.UserService;
 

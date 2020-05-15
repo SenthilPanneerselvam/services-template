@@ -1,4 +1,4 @@
-package com.zero.template.dtos;
+package com.zero.template.core;
 
 public class Error {
 	

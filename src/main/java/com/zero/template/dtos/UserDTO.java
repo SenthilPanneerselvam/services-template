@@ -20,6 +20,8 @@ public class UserDTO {
 	
 	private String federationId;
 	
+	private Long roleId;
+	
 	public Long getId() {
 		return this.id;
 	}
@@ -90,6 +92,14 @@ public class UserDTO {
 
 	public void setFederationId(String federationId) {
 		this.federationId = federationId;
+	}
+
+	public Long getRoleId() {
+		return roleId;
+	}
+
+	public void setRoleId(Long roleId) {
+		this.roleId = roleId;
 	}
 
 }
