@@ -1,10 +1,13 @@
 package com.zero.template.services;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.zero.template.core.BadRequestException;
 import com.zero.template.core.BeanMapper;
+import com.zero.template.core.NotFoundException;
 import com.zero.template.core.UnAuthenticatedException;
 import com.zero.template.dtos.LoginRequest;
 import com.zero.template.dtos.UserDTO;
@@ -47,13 +50,27 @@ public class UserService {
 	
 	public String authenticate(LoginRequest request) throws Exception {
 		User user = userRepo.findByUserName(request.getUserName());
-		if(user == null)
+		if(user == null || !user.getActive())
 			throw new UnAuthenticatedException("Invalid Login");
 		boolean verified = PasswordUtil.verifyPassword(request.getPassword(), user.getPassword(), user.getSalt());
 		if(!verified)
 			throw new UnAuthenticatedException("Invalid Login");
 		// create a JWT
 		return JwtService.generateJWT(user);
+	}
+	
+	public UserDTO getUser(Long userId) {
+		Optional<User> user = userRepo.findById(userId);
+		if(user.isEmpty())
+			throw new NotFoundException("User Not found");
+		return getUserDTO(user.get());
+	}
+	
+	private UserDTO getUserDTO(User user) {
+		UserDTO userDTO = BeanMapper.map(user, UserDTO.class);
+		userDTO.setPassword(null);
+		userDTO.setRoleId(user.getRole().getId());
+		return userDTO;
 	}
 	
 }

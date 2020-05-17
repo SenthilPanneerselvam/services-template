@@ -8,12 +8,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.zero.template.core.GenericResponse;
+import com.zero.template.core.Public;
 import com.zero.template.dtos.LoginRequest;
 import com.zero.template.dtos.UserDTO;
 import com.zero.template.services.UserService;
 
 @RestController
 @RequestMapping("/auth")
+@Public
 public class AuthController {
 	
 	@Autowired
