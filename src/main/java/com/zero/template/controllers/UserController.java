@@ -18,10 +18,6 @@ public class UserController {
 	@Autowired
 	private UserService service;
 	
-	@PostMapping()
-	public ResponseEntity<GenericResponse> signUp(@RequestBody UserDTO userdto) throws Exception {
-		userdto = service.saveUser(userdto);
-		return ResponseEntity.ok(new GenericResponse(userdto));
-	}
-
+	
+	
 }

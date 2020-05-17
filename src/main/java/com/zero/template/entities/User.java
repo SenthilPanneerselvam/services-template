@@ -17,6 +17,10 @@ public class User {
 	
 	private String userName;
 	
+	private String firstName;
+	
+	private String lastName;
+	
 	private String password;
 	
 	private String salt;
@@ -123,6 +127,22 @@ public class User {
 
 	public void setRole(Role role) {
 		this.role = role;
+	}
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
 	}
 	
 }

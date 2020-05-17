@@ -35,6 +35,8 @@ CREATE TABLE user (
     password varchar(255) not null,
     salt varchar(255) not null,
     user_name varchar(255) not null,
+    first_name varchar(255),
+    last_name varchar(255),
     role_id BIGINT(20) NOT NULL,
     PRIMARY KEY(id),
     UNIQUE(user_name),

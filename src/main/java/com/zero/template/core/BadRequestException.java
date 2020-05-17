@@ -1,21 +1,21 @@
 package com.zero.template.core;
 
-public class BadRequestException extends RuntimeException {
+import org.springframework.http.HttpStatus;
+
+public class BadRequestException extends AppException {
 
 	private static final long serialVersionUID = 1L;
 	
-	private String errorMessage;
-	
 	public BadRequestException(String errorMessage) {
-		this.setErrorMessage(errorMessage);
+		super(errorMessage);
+	}
+	
+	public HttpStatus getStatus() {
+		return HttpStatus.BAD_REQUEST;
 	}
 
-	public String getErrorMessage() {
-		return errorMessage;
-	}
-
-	public void setErrorMessage(String errorMessage) {
-		this.errorMessage = errorMessage;
+	public String getErrorCode() {
+		return "BAD_REQUEST";
 	}
 	
 }

@@ -18,10 +18,10 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
     }
     
-    @ExceptionHandler(value = { BadRequestException.class })
-    protected ResponseEntity<GenericResponse> handleConflict(BadRequestException ex, WebRequest request) {
+    @ExceptionHandler(value = { AppException.class })
+    protected ResponseEntity<GenericResponse> handleConflict(AppException ex, WebRequest request) {
         GenericResponse response = new GenericResponse();
-        response.addError("BAD_REQUEST", ex.getErrorMessage());
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+        response.addError(ex.getErrorCode(), ex.getErrorMessage());
+        return ResponseEntity.status(ex.getStatus()).body(response);
     }
 }
