@@ -13,4 +13,10 @@ public class AppConstants {
 		SYSTEM_USER.setUserName("System User");
 	}
 	
+	// constants used in header and jwt token
+	public static final String AUTH_HEADER = "authorization";
+	public static final String USER_ID = "userId";
+	public static final String USER_NAME = "userName";
+	public static final String ROLE_CODE = "roleCode";
+	
 }

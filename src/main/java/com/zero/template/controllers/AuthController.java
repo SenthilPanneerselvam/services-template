@@ -15,18 +15,19 @@ import com.zero.template.services.UserService;
 
 @RestController
 @RequestMapping("/auth")
-@Public
 public class AuthController {
 	
 	@Autowired
 	private UserService userService;
 
+	@Public
 	@PostMapping("/login")
 	public ResponseEntity<GenericResponse> login(@RequestBody LoginRequest request) throws Exception {
 		String jws = userService.authenticate(request);
 		return ResponseEntity.ok(new GenericResponse(jws));
 	}
 	
+	@Public
 	@PostMapping("/signup")
 	public ResponseEntity<GenericResponse> signUp(@RequestBody UserDTO userdto) throws Exception {
 		userdto = userService.saveUser(userdto);

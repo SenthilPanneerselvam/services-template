@@ -12,7 +12,8 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
  
     @ExceptionHandler(value = { Exception.class })
     protected ResponseEntity<GenericResponse> handleError (Exception ex, WebRequest request) {
-        GenericResponse response = new GenericResponse();
+    	ex.printStackTrace();
+    	GenericResponse response = new GenericResponse();
         response.addError("Server Error", "Something terrible happened, Please contact system administrator");
         ex.printStackTrace();
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);

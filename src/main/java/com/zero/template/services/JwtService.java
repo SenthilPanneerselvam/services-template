@@ -21,6 +21,7 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.zero.template.constants.AppConstants;
 import com.zero.template.core.JwtClaims;
 import com.zero.template.entities.User;
 
@@ -50,10 +51,6 @@ public class JwtService {
 	private static final String PRIVATE_KEY_PATH = "private_key_pkcs8.pem";
 
 	
-	// constants
-	private static final String USERID_CLAIM = "userId";
-	private static final String ROLE_CODE_CLAIM = "roleCode";
-	
 	// cache instances of key files
 	private static final PublicKey publicKey;
 	private static final PrivateKey privateKey;
@@ -81,10 +78,10 @@ public class JwtService {
 		Calendar expiry = Calendar.getInstance();
 		expiry.add(Calendar.YEAR, 1);
 		String jws = Jwts.builder().setSubject(user.getUserName()).
-				claim(USERID_CLAIM, user.getId()).
+				claim(AppConstants.USER_ID, user.getId()).
 				// basic assumption that the role will not be updated often
 				// if not the case should consider removing role code from jws
-				claim(ROLE_CODE_CLAIM, user.getRole().getCode()).
+				claim(AppConstants.ROLE_CODE, user.getRole().getCode()).
 				signWith(privateKey).
 				setExpiration(expiry.getTime()).
 				compact();
@@ -113,6 +110,7 @@ public class JwtService {
 					.build()
 					.parseClaimsJws(jws);
 			Claims body = claims.getBody();
+			System.out.println(body);
 			ObjectMapper mapper = new ObjectMapper();
 			parsedClaims = mapper.convertValue(body, JwtClaims.class);
 		} catch (JwtException ex) {

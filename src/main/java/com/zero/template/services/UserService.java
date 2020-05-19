@@ -2,6 +2,8 @@ package com.zero.template.services;
 
 import java.util.Optional;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -9,7 +11,10 @@ import com.zero.template.core.BadRequestException;
 import com.zero.template.core.BeanMapper;
 import com.zero.template.core.NotFoundException;
 import com.zero.template.core.UnAuthenticatedException;
+import com.zero.template.core.auth.UserProfile;
 import com.zero.template.dtos.LoginRequest;
+import com.zero.template.dtos.PrivilegeDTO;
+import com.zero.template.dtos.RoleDTO;
 import com.zero.template.dtos.UserDTO;
 import com.zero.template.entities.Role;
 import com.zero.template.entities.User;
@@ -46,6 +51,17 @@ public class UserService {
 		user.setId(userEntity.getId());
 		user.setPassword(null);
 		return user;
+	}
+	
+	@Transactional
+	public UserProfile getUserProfile(Long userId) {
+		UserProfile userProfile = new UserProfile();
+		Optional<User> user = userRepo.findById(userId);
+		UserDTO userdto = getUserDTO(user.get());
+		userProfile.initProfile(userdto);
+		userProfile.setRole(BeanMapper.map(user.get().getRole(), RoleDTO.class));
+		userProfile.setPrivileges(BeanMapper.map(user.get().getRole().getPrivileges(), PrivilegeDTO.class));
+		return userProfile;
 	}
 	
 	public String authenticate(LoginRequest request) throws Exception {

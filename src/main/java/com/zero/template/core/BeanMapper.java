@@ -1,6 +1,7 @@
 package com.zero.template.core;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import org.dozer.DozerBeanMapper;
@@ -18,7 +19,7 @@ public class BeanMapper {
 		mapper = new DozerBeanMapper();
 	}
 	
-	public static<T,V> List<V> map(List<T> source, Class<V> destination) {
+	public static<T,V> List<V> map(Collection<T> source, Class<V> destination) {
 		if(source == null)
 			return null;
 		List<V> dest = new ArrayList<V>();

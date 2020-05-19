@@ -8,6 +8,10 @@ public class JwtClaims {
 	
 	private String roleCode;
 	
+	private String sub;
+	
+	private Long exp;
+	
 	public String getUserName() {
 		return userName;
 	}
@@ -31,6 +35,22 @@ public class JwtClaims {
 
 	public void setRoleCode(String roleCode) {
 		this.roleCode = roleCode;
+	}
+
+	public String getSub() {
+		return sub;
+	}
+
+	public void setSub(String sub) {
+		this.sub = sub;
+	}
+
+	public Long getExp() {
+		return exp;
+	}
+
+	public void setExp(Long exp) {
+		this.exp = exp;
 	}
 
 }
