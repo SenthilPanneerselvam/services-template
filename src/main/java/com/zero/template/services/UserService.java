@@ -23,6 +23,7 @@ import com.zero.template.repositories.UserRepository;
 import com.zero.template.utils.PasswordUtil;
 
 @Service
+@Transactional
 public class UserService {
 	
 	@Autowired
@@ -53,8 +54,6 @@ public class UserService {
 		return user;
 	}
 	
-	@Transactional
-	// TODO: add this in a common place
 	public UserProfile getUserProfile(Long userId) {
 		UserProfile userProfile = new UserProfile();
 		Optional<User> user = userRepo.findById(userId);
