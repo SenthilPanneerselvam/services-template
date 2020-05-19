@@ -1,5 +1,6 @@
 package com.zero.template.core;
 
+// TODO: Clean up the unnecessary classes / variables
 public class JwtClaims {
 
 	private String userName;

@@ -54,6 +54,7 @@ public class UserService {
 	}
 	
 	@Transactional
+	// TODO: add this in a common place
 	public UserProfile getUserProfile(Long userId) {
 		UserProfile userProfile = new UserProfile();
 		Optional<User> user = userRepo.findById(userId);
