@@ -110,7 +110,6 @@ public class JwtService {
 					.build()
 					.parseClaimsJws(jws);
 			Claims body = claims.getBody();
-			System.out.println(body);
 			ObjectMapper mapper = new ObjectMapper();
 			parsedClaims = mapper.convertValue(body, JwtClaims.class);
 		} catch (JwtException ex) {

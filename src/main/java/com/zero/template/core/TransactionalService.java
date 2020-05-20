@@ -1,6 +1,7 @@
 package com.zero.template.core;
 
-import java.lang.annotation.Inherited;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 
 import javax.transaction.Transactional;
 
@@ -8,8 +9,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @Transactional
-@Inherited
-// TODO: create a common annotation for service class
+@Retention(RetentionPolicy.RUNTIME)
 public @interface TransactionalService {
 
 }

@@ -13,7 +13,7 @@ import org.springframework.web.servlet.HandlerInterceptor;
 
 import com.zero.template.constants.AppConstants;
 import com.zero.template.core.JwtClaims;
-import com.zero.template.core.Public;
+import com.zero.template.core.OpenEndPoint;
 import com.zero.template.core.UnAuthenticatedException;
 import com.zero.template.core.auth.RequestContext;
 import com.zero.template.core.auth.UserProfile;
@@ -35,7 +35,7 @@ public class AuthInterceptor implements HandlerInterceptor {
 		// I do not think we need to check for public annotation at the class level at this point in time
 		if(handler instanceof HandlerMethod) {
 			HandlerMethod handlerMethod = (HandlerMethod)handler;
-			Public methodAnnotation = handlerMethod.getMethod().getAnnotation(Public.class);
+			OpenEndPoint methodAnnotation = handlerMethod.getMethod().getAnnotation(OpenEndPoint.class);
 			if(methodAnnotation != null) {
 				return true;
 			}

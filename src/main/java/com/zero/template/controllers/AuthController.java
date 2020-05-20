@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.zero.template.core.GenericResponse;
-import com.zero.template.core.Public;
+import com.zero.template.core.OpenEndPoint;
 import com.zero.template.dtos.LoginRequest;
 import com.zero.template.dtos.UserDTO;
 import com.zero.template.services.UserService;
@@ -20,14 +20,14 @@ public class AuthController {
 	@Autowired
 	private UserService userService;
 
-	@Public
+	@OpenEndPoint
 	@PostMapping("/login")
 	public ResponseEntity<GenericResponse> login(@RequestBody LoginRequest request) throws Exception {
 		String jws = userService.authenticate(request);
 		return ResponseEntity.ok(new GenericResponse(jws));
 	}
 	
-	@Public
+	@OpenEndPoint
 	@PostMapping("/signup")
 	public ResponseEntity<GenericResponse> signUp(@RequestBody UserDTO userdto) throws Exception {
 		userdto = userService.saveUser(userdto);

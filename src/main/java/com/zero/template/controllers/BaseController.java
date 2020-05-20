@@ -13,12 +13,8 @@ public abstract class BaseController {
 	private RequestContext context;
 	
 	protected Long getUserId() {
-		Long userId = null;
 		UserProfile userProfile = context.getUserProfile();
-		if(userProfile != null) {
-			userId = userProfile.getUserId();
-		}
-		return userId;
+		return userProfile != null ? userProfile.getUserId() : null;
 	}
 	
 	protected UserProfile getUserProfile() {

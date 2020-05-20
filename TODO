@@ -1,0 +1,16 @@
+Implementation:
+1. HasRole
+2. HasPrivilege
+3. version check page 
+4. Possibilities of exporting this as a maven dependency
+5. script to use the template
+
+Documentations:
+1. Java doc & author in all classes
+2. ReadMe.md
+
+Publishing:
+1. Articles
+2. Forums
+3. Videos
+4. 

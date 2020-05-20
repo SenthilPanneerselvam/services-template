@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.zero.template.core.BadRequestException;
 import com.zero.template.core.BeanMapper;
 import com.zero.template.core.NotFoundException;
+import com.zero.template.core.TransactionalService;
 import com.zero.template.core.UnAuthenticatedException;
 import com.zero.template.core.auth.UserProfile;
 import com.zero.template.dtos.LoginRequest;
@@ -22,8 +23,7 @@ import com.zero.template.repositories.RoleRepository;
 import com.zero.template.repositories.UserRepository;
 import com.zero.template.utils.PasswordUtil;
 
-@Service
-@Transactional
+@TransactionalService
 public class UserService {
 	
 	@Autowired
