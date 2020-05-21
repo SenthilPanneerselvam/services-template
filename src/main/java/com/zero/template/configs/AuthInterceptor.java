@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 
@@ -29,6 +30,12 @@ public class AuthInterceptor implements HandlerInterceptor {
 	@Autowired
 	private UserService userService;
 	
+	/**
+	 * This method does not allow endpoints other than the one defined through {@link RequestMapping}.
+	 * For other endpoints it throws un authenticated exception
+	 * 
+	 * TODO: Revisit if this will cause any problems, in case of restful APIs
+	 */
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {

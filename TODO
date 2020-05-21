@@ -1,13 +1,11 @@
 Implementation:
-1. HasRole
-2. HasPrivilege
-3. version check page 
-4. Possibilities of exporting this as a maven dependency
-5. script to use the template
+* version check page 
+* Possibilities of exporting this as a maven dependency
+* script to use the template
 
 Documentations:
-1. Java doc & author in all classes
-2. ReadMe.md
+* Java doc & author in all classes
+* ReadMe.md
 
 Publishing:
 1. Articles

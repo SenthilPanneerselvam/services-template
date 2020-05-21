@@ -2,7 +2,6 @@ package com.zero.template.core.auth;
 
 import java.util.List;
 
-import com.zero.template.core.JwtClaims;
 import com.zero.template.dtos.PrivilegeDTO;
 import com.zero.template.dtos.RoleDTO;
 import com.zero.template.dtos.UserDTO;
